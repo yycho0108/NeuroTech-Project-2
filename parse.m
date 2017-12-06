@@ -14,7 +14,7 @@ function [data_norm, stimulus_type, match_type, event_times] = parse(filename)
     % text_color = data_norm(stimulus_type == 1);
     % audio_text = data_norm(stimulus_type == 2);
     % color_audio = data_norm(stimulus_type == 3);
-    
+  
     %% Parse Data
     raw_data = load(filename);
     raw_data = raw_data.mytraindata;
