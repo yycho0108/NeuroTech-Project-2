@@ -8,7 +8,7 @@ mns = cell2mat(cellfun(@min, src, 'UniformOutput', false));
 avgs = cell2mat(cellfun(@mean, src, 'UniformOutput', false));
 figure;
 hold on;
-plot(mxs);
+plot(mxs);  
 plot(mns);
 plot(avgs);
 hold off;
@@ -41,12 +41,10 @@ plot(event_times{k}, src{k});
 xlabel('Time(ms)');
 ylabel('Amplitude(?)');
 
-% Peak?
-smt = smooth(src{k}(:,1));
-plot(event_times{k}, smt);
+%smt = smooth(src{k}(:,1));
+%plot(event_times{k}, smt);
 
 % 95% conf. interval over all data
-
 all_src = vertcat(src{:});
 stds = std(all_src,0,1);
 ms = mean(all_src,1);

@@ -51,10 +51,14 @@ function [data_norm, stimulus_type, match_type, event_times] = parse(filename)
     for i=1:n
         % compute DC offset ...
         data_0 = data(:, event_idx(i,1) : event_idx(i,2));
-        
+        data_0 = data_0(:, floor(length(data_0)*4/5):end); % last 100 ms.
         % subtract & format data
         data_norm{i} = data(:, event_idx(i,2) : event_idx(i,3)) - mean(data_0, 2);
         data_norm{i} = data_norm{i}';
+        
+        % smooth ...
+        sz0 = size(data_norm{i});
+        data_norm{i} = reshape(smooth(data_norm{i}),sz0);
     end
     
     %% Plot Data for validation
