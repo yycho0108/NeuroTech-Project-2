@@ -21,12 +21,12 @@ end
 
 %good_data = zeros(length(event_times),1);
 
-for i=255:length(event_times)
+for i=120:length(event_times)
     figure;
-    plot(event_times{i}, data_norm{i}(:,[1,3,4]));
+    plot(event_times{i}, data_norm{i}(:,[1,2,3,4]));
     title(['Trial' num2str(i)]);
-    legend('1','3','4')
-    ylim([-40,40]);
+    legend('1','2,','3','4')
+    %ylim([-40,40]);
     w = waitforbuttonpress;
     if w == 0
         good_data(i)=0;
@@ -35,3 +35,33 @@ for i=255:length(event_times)
     end
     close
 end
+
+
+%%
+
+good_trials = zeros(71, 250, 4); %(number of good trials, number of time points, # Channels)
+condition = zeros(71,1);
+j = 1; 
+for i=1:length(good_data)
+    if good_data(i) == 1
+        good_trials(j,:,:) = data_norm{i}(1:250,:);
+        condition(j) = stimulus_type(i);
+        j = j+1;
+    end
+end
+
+plot(good_trials(:,:,4)') %plot each channely
+C = mean(good_trials(:,:,4))
+plot(0:2:498, C)
+
+%%
+D = mean(good_trials(:,:,3));
+E = mean(good_trials(:,:,2));
+F = mean(good_trials(:,:,1));
+
+plot(0:2:498, D)
+hold on
+%plot(0:2:498, E)
+plot(0:2:498, F)
+plot(0:2:498, C)
+legend('3', '2', '1', '4')
