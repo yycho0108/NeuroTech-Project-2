@@ -51,7 +51,7 @@ for i=1:length(good_data)
 end
 
 plot(good_trials(:,:,4)') %plot each channely
-C = mean(good_trials(:,:,4))
+C = mean(good_trials(:,:,4));
 plot(0:2:498, C)
 
 %%
