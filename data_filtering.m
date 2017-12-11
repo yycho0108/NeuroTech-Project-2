@@ -58,7 +58,7 @@ for i=1:length(data_norm_noblinks)
         continue %CLICK FOR BAD DATA. The bad data is not stored
     else
         good_trials_Ch4(k,:) = data_norm_noblinks{i}(1:250,channel)'; %PRESS THE SPACE BAR FOR GOOD DATA. Stores the first 250 time events.
-        conditions_Ch4(k,1) = stimulus_type(i); 
+        conditions_Ch4(k,1) = stimulus_type(i);
     end
     k = k+1;
  end
@@ -117,6 +117,18 @@ hold on
 plot(0:2:498, mean(good_trials_Ch4(conditions_Ch4 == 2, :),'omitnan'))
 plot(0:2:498, mean(good_trials_Ch4(conditions_Ch4 == 3, :),'omitnan'))
 title('Channel 4')
+legend('Stimulus 1', 'Stimulus 2', 'Stimulus 3')
+xlabel('Time (ms)')
+ylabel('mV')
+
+%% Plotting the mean of Channels 2 & 3
+
+figure;
+plot(0:2:498, mean([good_trials_Ch4(conditions_Ch4 == 1, :); good_trials_Ch3(conditions_Ch3 == 1, :)],'omitnan'))
+hold on
+plot(0:2:498, mean([good_trials_Ch4(conditions_Ch4 == 2, :); good_trials_Ch3(conditions_Ch3 == 2, :)],'omitnan'))
+plot(0:2:498, mean([good_trials_Ch4(conditions_Ch4 == 3, :); good_trials_Ch3(conditions_Ch3 == 1, :)],'omitnan'))
+title('Channel 3&4')
 legend('Stimulus 1', 'Stimulus 2', 'Stimulus 3')
 xlabel('Time (ms)')
 ylabel('mV')
